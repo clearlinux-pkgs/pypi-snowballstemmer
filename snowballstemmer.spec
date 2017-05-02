@@ -4,7 +4,7 @@
 #
 Name     : snowballstemmer
 Version  : 1.2.1
-Release  : 1
+Release  : 2
 URL      : http://pypi.debian.net/snowballstemmer/snowballstemmer-1.2.1.tar.gz
 Source0  : http://pypi.debian.net/snowballstemmer/snowballstemmer-1.2.1.tar.gz
 Summary  : This package provides 16 stemmer algorithms (15 + Poerter English stemmer) generated from Snowball algorithms.
