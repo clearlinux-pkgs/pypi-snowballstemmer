@@ -4,7 +4,7 @@
 #
 Name     : snowballstemmer
 Version  : 1.2.1
-Release  : 2
+Release  : 3
 URL      : http://pypi.debian.net/snowballstemmer/snowballstemmer-1.2.1.tar.gz
 Source0  : http://pypi.debian.net/snowballstemmer/snowballstemmer-1.2.1.tar.gz
 Summary  : This package provides 16 stemmer algorithms (15 + Poerter English stemmer) generated from Snowball algorithms.
@@ -33,20 +33,27 @@ python components for the snowballstemmer package.
 %setup -q -n snowballstemmer-1.2.1
 
 %build
+export http_proxy=http://127.0.0.1:9/
+export https_proxy=http://127.0.0.1:9/
+export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1488568737
+export SOURCE_DATE_EPOCH=1503080319
 python2 setup.py build -b py2
 python3 setup.py build -b py3
 
 %install
-export SOURCE_DATE_EPOCH=1488568737
+export SOURCE_DATE_EPOCH=1503080319
 rm -rf %{buildroot}
 python2 -tt setup.py build -b py2 install --root=%{buildroot} --force
 python3 -tt setup.py build -b py3 install --root=%{buildroot} --force
+echo ----[ mark ]----
+cat %{buildroot}/usr/lib/python3*/site-packages/*/requires.txt || :
+echo ----[ mark ]----
 
 %files
 %defattr(-,root,root,-)
 
 %files python
 %defattr(-,root,root,-)
-/usr/lib/python*/*
+/usr/lib/python2*/*
+/usr/lib/python3*/*
