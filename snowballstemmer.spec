@@ -14,7 +14,7 @@ Requires: snowballstemmer-python3
 Requires: snowballstemmer-python
 BuildRequires : pbr
 BuildRequires : pip
-BuildRequires : python-dev
+
 BuildRequires : python3-dev
 BuildRequires : setuptools
 
