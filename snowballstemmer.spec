@@ -4,19 +4,22 @@
 #
 Name     : snowballstemmer
 Version  : 1.2.1
-Release  : 16
+Release  : 17
 URL      : http://pypi.debian.net/snowballstemmer/snowballstemmer-1.2.1.tar.gz
 Source0  : http://pypi.debian.net/snowballstemmer/snowballstemmer-1.2.1.tar.gz
 Summary  : This package provides 16 stemmer algorithms (15 + Poerter English stemmer) generated from Snowball algorithms.
 Group    : Development/Tools
 License  : BSD-2-Clause
 Requires: snowballstemmer-python3
+Requires: snowballstemmer-license
 Requires: snowballstemmer-python
 BuildRequires : pbr
 BuildRequires : pip
-
+BuildRequires : python-core
+BuildRequires : python3-core
 BuildRequires : python3-dev
 BuildRequires : setuptools
+BuildRequires : setuptools-legacypython
 
 %description
 Snowball stemming library collection for Python
@@ -29,6 +32,14 @@ Requires: python-core
 
 %description legacypython
 legacypython components for the snowballstemmer package.
+
+
+%package license
+Summary: license components for the snowballstemmer package.
+Group: Default
+
+%description license
+license components for the snowballstemmer package.
 
 
 %package python
@@ -57,13 +68,15 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1519350507
+export SOURCE_DATE_EPOCH=1530377364
 python2 setup.py build -b py2
 python3 setup.py build -b py3
 
 %install
-export SOURCE_DATE_EPOCH=1519350507
+export SOURCE_DATE_EPOCH=1530377364
 rm -rf %{buildroot}
+mkdir -p %{buildroot}/usr/share/doc/snowballstemmer
+cp LICENSE.rst %{buildroot}/usr/share/doc/snowballstemmer/LICENSE.rst
 python2 -tt setup.py build -b py2 install --root=%{buildroot} --force
 python3 -tt setup.py build -b py3 install --root=%{buildroot} --force
 echo ----[ mark ]----
@@ -76,6 +89,10 @@ echo ----[ mark ]----
 %files legacypython
 %defattr(-,root,root,-)
 /usr/lib/python2*/*
+
+%files license
+%defattr(-,root,root,-)
+/usr/share/doc/snowballstemmer/LICENSE.rst
 
 %files python
 %defattr(-,root,root,-)
