@@ -4,35 +4,20 @@
 #
 Name     : snowballstemmer
 Version  : 1.2.1
-Release  : 23
+Release  : 24
 URL      : http://pypi.debian.net/snowballstemmer/snowballstemmer-1.2.1.tar.gz
 Source0  : http://pypi.debian.net/snowballstemmer/snowballstemmer-1.2.1.tar.gz
 Summary  : This package provides 16 stemmer algorithms (15 + Poerter English stemmer) generated from Snowball algorithms.
 Group    : Development/Tools
 License  : BSD-2-Clause
-Requires: snowballstemmer-python3
-Requires: snowballstemmer-license
-Requires: snowballstemmer-python
-BuildRequires : pbr
-BuildRequires : pip
-BuildRequires : python-core
-BuildRequires : python3-core
-BuildRequires : python3-dev
-BuildRequires : setuptools
-BuildRequires : setuptools-legacypython
+Requires: snowballstemmer-license = %{version}-%{release}
+Requires: snowballstemmer-python = %{version}-%{release}
+Requires: snowballstemmer-python3 = %{version}-%{release}
+BuildRequires : buildreq-distutils3
 
 %description
 Snowball stemming library collection for Python
 ===============================================
-
-%package legacypython
-Summary: legacypython components for the snowballstemmer package.
-Group: Default
-Requires: python-core
-
-%description legacypython
-legacypython components for the snowballstemmer package.
-
 
 %package license
 Summary: license components for the snowballstemmer package.
@@ -45,7 +30,7 @@ license components for the snowballstemmer package.
 %package python
 Summary: python components for the snowballstemmer package.
 Group: Default
-Requires: snowballstemmer-python3
+Requires: snowballstemmer-python3 = %{version}-%{release}
 
 %description python
 python components for the snowballstemmer package.
@@ -68,17 +53,16 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1530377364
-python2 setup.py build -b py2
-python3 setup.py build -b py3
+export SOURCE_DATE_EPOCH=1554328698
+export MAKEFLAGS=%{?_smp_mflags}
+python3 setup.py build
 
 %install
-export SOURCE_DATE_EPOCH=1530377364
+export MAKEFLAGS=%{?_smp_mflags}
 rm -rf %{buildroot}
-mkdir -p %{buildroot}/usr/share/doc/snowballstemmer
-cp LICENSE.rst %{buildroot}/usr/share/doc/snowballstemmer/LICENSE.rst
-python2 -tt setup.py build -b py2 install --root=%{buildroot} --force
-python3 -tt setup.py build -b py3 install --root=%{buildroot} --force
+mkdir -p %{buildroot}/usr/share/package-licenses/snowballstemmer
+cp LICENSE.rst %{buildroot}/usr/share/package-licenses/snowballstemmer/LICENSE.rst
+python3 -tt setup.py build  install --root=%{buildroot}
 echo ----[ mark ]----
 cat %{buildroot}/usr/lib/python3*/site-packages/*/requires.txt || :
 echo ----[ mark ]----
@@ -86,13 +70,9 @@ echo ----[ mark ]----
 %files
 %defattr(-,root,root,-)
 
-%files legacypython
-%defattr(-,root,root,-)
-/usr/lib/python2*/*
-
 %files license
-%defattr(-,root,root,-)
-/usr/share/doc/snowballstemmer/LICENSE.rst
+%defattr(0644,root,root,0755)
+/usr/share/package-licenses/snowballstemmer/LICENSE.rst
 
 %files python
 %defattr(-,root,root,-)
