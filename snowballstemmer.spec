@@ -6,7 +6,7 @@
 #
 Name     : snowballstemmer
 Version  : 2.0.0
-Release  : 34
+Release  : 35
 URL      : https://files.pythonhosted.org/packages/21/1b/6b8bbee253195c61aeaa61181bb41d646363bdaa691d0b94b304d4901193/snowballstemmer-2.0.0.tar.gz
 Source0  : https://files.pythonhosted.org/packages/21/1b/6b8bbee253195c61aeaa61181bb41d646363bdaa691d0b94b304d4901193/snowballstemmer-2.0.0.tar.gz
 Source1  : https://files.pythonhosted.org/packages/21/1b/6b8bbee253195c61aeaa61181bb41d646363bdaa691d0b94b304d4901193/snowballstemmer-2.0.0.tar.gz.asc
@@ -19,36 +19,8 @@ Requires: snowballstemmer-python3 = %{version}-%{release}
 BuildRequires : buildreq-distutils3
 
 %description
-It includes following language algorithms:
-
-* Arabic
-* Basque
-* Catalan
-* Danish
-* Dutch
-* English (Standard, Porter)
-* Finnish
-* French
-* German
-* Greek
-* Hindi
-* Hungarian
-* Indonesian
-* Irish
-* Italian
-* Lithuanian
-* Nepali
-* Norwegian
-* Portuguese
-* Romanian
-* Russian
-* Spanish
-* Swedish
-* Tamil
-* Turkish
-
-This is a pure Python stemming library. If `PyStemmer <https://pypi.org/project/PyStemmer/>`_ is available, this module uses
-it to accelerate.
+Snowball stemming library collection for Python
+===============================================
 
 %package license
 Summary: license components for the snowballstemmer package.
@@ -86,12 +58,11 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1582921175
-# -Werror is for werrorists
+export SOURCE_DATE_EPOCH=1603404547
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -fno-lto "
-export FCFLAGS="$CFLAGS -fno-lto "
-export FFLAGS="$CFLAGS -fno-lto "
+export FCFLAGS="$FFLAGS -fno-lto "
+export FFLAGS="$FFLAGS -fno-lto "
 export CXXFLAGS="$CXXFLAGS -fno-lto "
 export MAKEFLAGS=%{?_smp_mflags}
 python3 setup.py build
