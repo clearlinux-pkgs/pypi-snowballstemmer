@@ -5,12 +5,12 @@
 # Source0 file verified with key 0x6646265B586B83CB (mitya57@gmail.com)
 #
 Name     : snowballstemmer
-Version  : 2.0.0
-Release  : 38
-URL      : https://files.pythonhosted.org/packages/21/1b/6b8bbee253195c61aeaa61181bb41d646363bdaa691d0b94b304d4901193/snowballstemmer-2.0.0.tar.gz
-Source0  : https://files.pythonhosted.org/packages/21/1b/6b8bbee253195c61aeaa61181bb41d646363bdaa691d0b94b304d4901193/snowballstemmer-2.0.0.tar.gz
-Source1  : https://files.pythonhosted.org/packages/21/1b/6b8bbee253195c61aeaa61181bb41d646363bdaa691d0b94b304d4901193/snowballstemmer-2.0.0.tar.gz.asc
-Summary  : This package provides 26 stemmers for 25 languages generated from Snowball algorithms.
+Version  : 2.1.0
+Release  : 39
+URL      : https://files.pythonhosted.org/packages/a3/3d/d305c9112f35df6efb51e5acd0db7009b74d86f35580e033451b5994a0a9/snowballstemmer-2.1.0.tar.gz
+Source0  : https://files.pythonhosted.org/packages/a3/3d/d305c9112f35df6efb51e5acd0db7009b74d86f35580e033451b5994a0a9/snowballstemmer-2.1.0.tar.gz
+Source1  : https://files.pythonhosted.org/packages/a3/3d/d305c9112f35df6efb51e5acd0db7009b74d86f35580e033451b5994a0a9/snowballstemmer-2.1.0.tar.gz.asc
+Summary  : This package provides 29 stemmers for 28 languages generated from Snowball algorithms.
 Group    : Development/Tools
 License  : BSD-3-Clause
 Requires: snowballstemmer-license = %{version}-%{release}
@@ -19,8 +19,40 @@ Requires: snowballstemmer-python3 = %{version}-%{release}
 BuildRequires : buildreq-distutils3
 
 %description
-Snowball stemming library collection for Python
 ===============================================
+        
+        Both Python 2 and Python 3 (>= 3.3) are supported.
+        
+        What is Stemming?
+        -----------------
+        
+        Stemming maps different forms of the same word to a common "stem" - for
+        example, the English stemmer maps *connection*, *connections*, *connective*,
+        *connected*, and *connecting* to *connect*.  So a searching for *connected*
+        would also find documents which only have the other forms.
+        
+        This stem form is often a word itself, but this is not always the case as this
+        is not a requirement for text search systems, which are the intended field of
+        use.  We also aim to conflate words with the same meaning, rather than all
+        words with a common linguistic root (so *awe* and *awful* don't have the same
+        stem), and over-stemming is more problematic than under-stemming so we tend not
+        to stem in cases that are hard to resolve.  If you want to always reduce words
+        to a root form and/or get a root form which is itself a word then Snowball's
+        stemming algorithms likely aren't the right answer.
+        
+        How to use library
+        ------------------
+        
+        The ``snowballstemmer`` module has two functions.
+        
+        The ``snowballstemmer.algorithms`` function returns a list of available
+        algorithm names.
+        
+        The ``snowballstemmer.stemmer`` function takes an algorithm name and returns a
+        ``Stemmer`` object.
+        
+        ``Stemmer`` objects have a ``Stemmer.stemWord(word)`` method and a
+        ``Stemmer.stemWords(word[])`` method.
 
 %package license
 Summary: license components for the snowballstemmer package.
@@ -50,15 +82,15 @@ python3 components for the snowballstemmer package.
 
 
 %prep
-%setup -q -n snowballstemmer-2.0.0
-cd %{_builddir}/snowballstemmer-2.0.0
+%setup -q -n snowballstemmer-2.1.0
+cd %{_builddir}/snowballstemmer-2.1.0
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1603404547
+export SOURCE_DATE_EPOCH=1611429705
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -fno-lto "
 export FCFLAGS="$FFLAGS -fno-lto "
@@ -71,7 +103,7 @@ python3 setup.py build
 export MAKEFLAGS=%{?_smp_mflags}
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/snowballstemmer
-cp %{_builddir}/snowballstemmer-2.0.0/COPYING %{buildroot}/usr/share/package-licenses/snowballstemmer/3938505906e841002141cb01bbda1e971614e34a
+cp %{_builddir}/snowballstemmer-2.1.0/COPYING %{buildroot}/usr/share/package-licenses/snowballstemmer/f8d2c0ec1880e550ce455b2c660493b9d81f496d
 python3 -tt setup.py build  install --root=%{buildroot}
 echo ----[ mark ]----
 cat %{buildroot}/usr/lib/python3*/site-packages/*/requires.txt || :
@@ -82,7 +114,7 @@ echo ----[ mark ]----
 
 %files license
 %defattr(0644,root,root,0755)
-/usr/share/package-licenses/snowballstemmer/3938505906e841002141cb01bbda1e971614e34a
+/usr/share/package-licenses/snowballstemmer/f8d2c0ec1880e550ce455b2c660493b9d81f496d
 
 %files python
 %defattr(-,root,root,-)
