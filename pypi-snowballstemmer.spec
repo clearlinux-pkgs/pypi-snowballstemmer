@@ -4,18 +4,18 @@
 #
 # Source0 file verified with key 0x6646265B586B83CB (mitya57@gmail.com)
 #
-Name     : snowballstemmer
+Name     : pypi-snowballstemmer
 Version  : 2.2.0
-Release  : 50
+Release  : 51
 URL      : https://files.pythonhosted.org/packages/44/7b/af302bebf22c749c56c9c3e8ae13190b5b5db37a33d9068652e8f73b7089/snowballstemmer-2.2.0.tar.gz
 Source0  : https://files.pythonhosted.org/packages/44/7b/af302bebf22c749c56c9c3e8ae13190b5b5db37a33d9068652e8f73b7089/snowballstemmer-2.2.0.tar.gz
 Source1  : https://files.pythonhosted.org/packages/44/7b/af302bebf22c749c56c9c3e8ae13190b5b5db37a33d9068652e8f73b7089/snowballstemmer-2.2.0.tar.gz.asc
 Summary  : This package provides 29 stemmers for 28 languages generated from Snowball algorithms.
 Group    : Development/Tools
 License  : BSD-3-Clause
-Requires: snowballstemmer-license = %{version}-%{release}
-Requires: snowballstemmer-python = %{version}-%{release}
-Requires: snowballstemmer-python3 = %{version}-%{release}
+Requires: pypi-snowballstemmer-license = %{version}-%{release}
+Requires: pypi-snowballstemmer-python = %{version}-%{release}
+Requires: pypi-snowballstemmer-python3 = %{version}-%{release}
 BuildRequires : buildreq-distutils3
 
 %description
@@ -23,30 +23,30 @@ Snowball stemming library collection for Python
 ===============================================
 
 %package license
-Summary: license components for the snowballstemmer package.
+Summary: license components for the pypi-snowballstemmer package.
 Group: Default
 
 %description license
-license components for the snowballstemmer package.
+license components for the pypi-snowballstemmer package.
 
 
 %package python
-Summary: python components for the snowballstemmer package.
+Summary: python components for the pypi-snowballstemmer package.
 Group: Default
-Requires: snowballstemmer-python3 = %{version}-%{release}
+Requires: pypi-snowballstemmer-python3 = %{version}-%{release}
 
 %description python
-python components for the snowballstemmer package.
+python components for the pypi-snowballstemmer package.
 
 
 %package python3
-Summary: python3 components for the snowballstemmer package.
+Summary: python3 components for the pypi-snowballstemmer package.
 Group: Default
 Requires: python3-core
 Provides: pypi(snowballstemmer)
 
 %description python3
-python3 components for the snowballstemmer package.
+python3 components for the pypi-snowballstemmer package.
 
 
 %prep
@@ -58,7 +58,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1641429586
+export SOURCE_DATE_EPOCH=1641583836
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -fno-lto "
 export FCFLAGS="$FFLAGS -fno-lto "
@@ -70,8 +70,8 @@ python3 setup.py build
 %install
 export MAKEFLAGS=%{?_smp_mflags}
 rm -rf %{buildroot}
-mkdir -p %{buildroot}/usr/share/package-licenses/snowballstemmer
-cp %{_builddir}/snowballstemmer-2.2.0/COPYING %{buildroot}/usr/share/package-licenses/snowballstemmer/f8d2c0ec1880e550ce455b2c660493b9d81f496d
+mkdir -p %{buildroot}/usr/share/package-licenses/pypi-snowballstemmer
+cp %{_builddir}/snowballstemmer-2.2.0/COPYING %{buildroot}/usr/share/package-licenses/pypi-snowballstemmer/f8d2c0ec1880e550ce455b2c660493b9d81f496d
 python3 -tt setup.py build  install --root=%{buildroot}
 echo ----[ mark ]----
 cat %{buildroot}/usr/lib/python3*/site-packages/*/requires.txt || :
@@ -82,7 +82,7 @@ echo ----[ mark ]----
 
 %files license
 %defattr(0644,root,root,0755)
-/usr/share/package-licenses/snowballstemmer/f8d2c0ec1880e550ce455b2c660493b9d81f496d
+/usr/share/package-licenses/pypi-snowballstemmer/f8d2c0ec1880e550ce455b2c660493b9d81f496d
 
 %files python
 %defattr(-,root,root,-)
